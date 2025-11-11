@@ -1,4 +1,4 @@
-# arkhé
+# Arkhé
 
 Trabalho de conclusão do curso de desenvolvimento de sistemas da ETEC de Praia Grande.
 
