@@ -1,0 +1,31 @@
+@import "./theme.css";
+
+.ui-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ui-input-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.ui-input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(15,23,42,0.14);
+  background: white;
+  font-size: 14px;
+  transition: border 0.2s ease;
+}
+
+.ui-input::placeholder {
+  color: rgba(15,23,42,0.35);
+}
+
+.ui-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}

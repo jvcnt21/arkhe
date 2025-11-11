@@ -1,0 +1,113 @@
+@import "../../styles/theme.css";
+
+
+.activity-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.activity-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.activity-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.activity-sub {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Timeline container */
+.activity-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  margin-top: 6px;
+}
+
+.timeline-row {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  gap: 18px;
+}
+
+/* Vertical line */
+.timeline-line {
+  position: absolute;
+  left: 6px;
+  top: 22px;
+  width: 2px;
+  height: calc(100% - 10px);
+  background: rgba(15,23,42,0.06);
+}
+
+.timeline-line[data-last="true"] {
+  height: 0; /* remove line on last item */
+}
+
+/* Dot */
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-top: 4px;
+  border: 2px solid white;
+  z-index: 2;
+  box-shadow: 0 0 0 3px rgba(15,23,42,0.05);
+}
+
+/* Dot colors by status */
+.timeline-dot[data-type="success"] { background: var(--success); }
+.timeline-dot[data-type="info"] { background: var(--accent); }
+.timeline-dot[data-type="danger"] { background: var(--danger); }
+
+/* Card styling inside timeline */
+.activity-card {
+  width: 100%;
+  padding: 18px 20px;
+}
+
+.activity-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity-card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.activity-card-desc {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.activity-card-date {
+  margin-top: 8px;
+  display: block;
+  font-size: 13px;
+  color: var(--muted-2);
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  .timeline-row {
+    gap: 14px;
+  }
+}

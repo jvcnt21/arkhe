@@ -1,26 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client'; // Use ReactDOM.createRoot para React 18+
+import ReactDOM from 'react-dom/client';
 import App from './App';
-import { AuthProvider } from './context/AuthContext'; // Importe seu provedor
+import { AuthProvider } from './context/AuthContext';
+import { BrowserRouter } from "react-router-dom"; // ✅ IMPORTANTE
 
-// Para React 18+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthProvider> {/* Envolve toda a sua aplicação */}
-      <App />
-    </AuthProvider>
+    <BrowserRouter> {/* ✅ Envolve tudo */}
+      <AuthProvider> {/* ✅ Continua envolvendo a aplicação */}
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
-
-// Para React 17 ou anterior:
-/*
-ReactDOM.render(
-  <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-*/
