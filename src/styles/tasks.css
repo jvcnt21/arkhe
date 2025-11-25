@@ -1,0 +1,300 @@
+/* ===== CONTAINER GERAL ===== */
+.tasks-wrapper {
+  width: 100%;
+  padding: 40px 20px; /* reduzido para deixar menos gordo */
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  background: transparent;
+}
+
+/* TÍTULO (agora alinhado à esquerda) */
+.titulo-geral {
+  font-size: 28px;
+  font-weight: 600;
+  color: #132469;
+  margin-bottom: 30px;
+  text-align: left; /* antes era center */
+}
+
+/* ===== BOARD ===== */
+.task-board {
+  display: flex;
+  gap: 16px; /* reduzido de 28px */
+  width: 100%;
+  justify-content: stretch;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+/* ===== COLUNAS ===== */
+.task-column {
+  background: #ffffff;
+
+  flex: 1 1 0;
+  min-width: 280px;
+  max-width: none;
+
+  min-height: 560px;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+}
+
+/* CABEÇALHO */
+.col-header {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+/* BOLINHAS DE STATUS */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.red { background: #dc2626; }
+.yellow { background: #facc15; }
+.green { background: #16a34a; }
+
+/* ===== ÁREA DE CARDS ===== */
+.cards-area {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-right: 6px;
+  box-sizing: border-box;
+}
+
+/* ===== CARD ===== */
+.task-card {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e6eef8;
+}
+
+.task-card p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+/* ===== TAGS ===== */
+.tag {
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 6px;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+}
+
+.tag.alta { background: #facc15; color: #000; }
+.tag.crítica { background: #dc2626; }
+.tag.média { background: #3b82f6; }
+.tag.baixa { background: #16a34a; }
+
+/* ===== BOTÃO DE ADICIONAR ===== */
+.add-btn {
+  border: 2px dashed #cbd5e1;
+  color: #475569;
+  background: transparent;
+  padding: 12px;
+  border-radius: 10px;
+  width: 100%;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 14px;
+  transition: 0.2s ease;
+
+  position: sticky;
+  bottom: 0;
+}
+
+.add-btn:hover {
+  background: #e2e8f0;
+}
+/* ===== MODAL - FUNDO ===== */
+.modal-fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 24, 39, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  z-index: 2000;
+}
+
+/* ===== MODAL - CARD ===== */
+.modal-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 14px;
+  width: 420px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  animation: modalAparecer 0.2s ease;
+}
+
+@keyframes modalAparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #132469;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* ===== CAMPOS DO FORM ===== */
+.modal-card label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  display: block;
+  margin-top: 14px;
+}
+
+.modal-card input[type="text"],
+.modal-card select,
+.modal-card input[type="file"] {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+  background: #f9fafb;
+}
+
+.modal-card input[type="text"]:focus,
+.modal-card select:focus {
+  border-color: #6366f1;
+  background: #ffffff;
+}
+
+/* ===== BOTÕES ===== */
+.modal-actions {
+  margin-top: 22px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modal-actions button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s ease;
+  font-weight: 600;
+}
+
+.modal-actions .cancelar {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.modal-actions .cancelar:hover {
+  background: #d1d5db;
+}
+
+.modal-actions .salvar {
+  background: #4f46e5;
+  color: white;
+}
+
+.modal-actions .salvar:hover {
+  background: #4338ca;
+}
+
+/* ===== LISTA DE ARQUIVOS ===== */
+.file-list {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.file-item {
+  background: #eef2ff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #4f46e5;
+  border: 1px solid #c7d2fe;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 420px;
+  max-width: 95%;
+}
+
+
+/* ===== MOBILE ===== */
+@media (max-width: 1100px) {
+  .task-board {
+    gap: 18px;
+  }
+  .task-column {
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 820px) {
+  .task-board {
+    flex-direction: column;
+  }
+  .task-column {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}

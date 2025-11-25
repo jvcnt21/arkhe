@@ -1,0 +1,86 @@
+.equipeProjetos-wrapper {
+    padding: 40px 60px;
+    color: #132469;
+  }
+  
+  .page-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+  
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 26px;
+  }
+  
+  .membro-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: 0.2s ease;
+  }
+  
+  .membro-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 22px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .info h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .info .cargo {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 8px;
+  }
+  
+  .status {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+  
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  .status-dot.online { background: #22c55e; }
+  .status-dot.offline { background: #ef4444; }
+  .status-dot.ausente { background: #facc15; }
+  
+  .atividades ul {
+    padding-left: 18px;
+    margin: 6px 0 0 0;
+  }
+  
+  .atividades li {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  

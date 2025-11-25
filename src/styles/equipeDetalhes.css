@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* === CONTAINER PRINCIPAL === */
+.equipe-wrapper {
+  width: 100%;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* TÍTULO */
+.equipe-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #132469;
+  margin-bottom: 25px;
+}
+
+/* CARD GERAL */
+.equipe-card {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* CABEÇALHO DO MEMBRO */
+.equipe-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.equipe-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: #eef2ff;
+  color: #4f46e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.equipe-info h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.equipe-info p {
+  margin: 2px 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+/* LISTA DE ENTREGAS */
+.membros-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+/* ITEM */
+.membro-item {
+  background: #f8fafc;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: 0.25s ease;
+}
+
+.membro-item:hover {
+  background: #eef2ff;
+  transform: translateX(4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* FOTO / ÍCONE DE ENTREGA */
+.membro-foto {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e7edf7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+/* TEXTO */
+.membro-info .nome {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.membro-info .cargo {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* STATUS */
+.membro-status {
+  margin-left: auto;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.status-online {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .equipe-wrapper {
+    padding: 20px;
+  }
+
+  .equipe-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .membro-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .membro-status {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* ======= GERAL ======= */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f5f7fb;
+  overflow-y: auto;
+}
+
+.dashboard-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #f5f7fb;
+  color: #132469;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* ======= CABEÇALHO ======= */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+.top-header h2 {
+  font-weight: 600;
+  font-size: 26px;
+  margin: 0;
+}
+
+/* ======= ESTATÍSTICAS ======= */
+.dashboard-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 280px;
+  background: #fff;
+  padding: 24px 24px 24px 60px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  position: relative;
+  transition: 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-card .icon {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+}
+
+.icon.azul { color: #3b82f6; }
+.icon.roxo { color: #8b5cf6; }
+
+.stat-card p {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #6b7280;
+}
+
+.stat-card h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #132469;
+}
+
+/* ======= CONTEÚDO PRINCIPAL ======= */
+.main-content {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 30px;
+  align-items: start;
+  width: 100%;
+}
+
+/* ======= NOTIFICAÇÕES ======= */
+.notificacoes {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.section-title i {
+  font-size: 20px;
+}
+
+.section-title.azul i { color: #3b82f6; }
+.section-title.roxo i { color: #8b5cf6; }
+.section-title.amarelo i { color: #facc15; }
+
+/* NOTIFICAÇÕES — SEM SCROLL */
+.notif-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: visible;
+  max-height: none;
+}
+
+/* Cartão */
+.notif-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #f1f5f9;
+  transition: 0.2s ease;
+}
+
+.notif-card:hover {
+  transform: translateX(4px);
+  background: #ececec;
+}
+
+/* === CARDS SOMENTE COM A BORDA COLORIDA === */
+.notif-card.blue {
+  border-left: 6px solid #3b82f6 !important;
+  background: #f9fafb !important;
+}
+
+.notif-card.green {
+  border-left: 6px solid #16a34a !important;
+  background: #f9fafb !important;
+}
+
+.notif-card.yellow {
+  border-left: 6px solid #facc15 !important;
+  background: #f9fafb !important;
+}
+
+
+.notif-card strong {
+  display: block;
+  font-weight: 600;
+  color: #132469;
+}
+
+/* ======= EQUIPE ======= */
+.equipe {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.equipe .membro {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.equipe .membro:hover {
+  background: #eef2ff;
+  transform: translateX(4px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+/* Avatar com inicial */
+.membro-foto-inicial {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #eef2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #4f46e5;
+}
+
+.membro-info p {
+  margin: 0;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.membro-info span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ======= ATIVIDADE ======= */
+.atividade {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+}
+
+/* ===================== MODAL — PRAZO PRÓXIMO ===================== */
+
+.modal-fundo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+
+/* Card do modal */
+.modal-card {
+  background: #ffffff;
+  width: 420px;
+  max-width: 92%;
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.25s ease;
+}
+
+.modal-card h3 {
+  margin: 0 0 12px 0;
+  color: #132469;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal-card p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #374151;
+}
+
+.modal-card strong {
+  color: #132469;
+}
+
+/* Botões */
+.modal-btns {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+/* Botão "Fazer tarefa" */
+.modal-btn.fazer {
+  background: #16a34a ;
+  color: #000;
+}
+
+/* Botão "Fazer mais tarde" */
+.modal-btn.tarde {
+  background: #facc15;
+  color: #374151;
+}
+
+/* ====== ANIMAÇÕES ====== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(25px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* ======= RESPONSIVIDADE ======= */
+@media (max-width: 1024px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-container {
+    padding: 20px;
+  }
+}

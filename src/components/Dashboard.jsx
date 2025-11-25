@@ -9,8 +9,7 @@ function Dashboard() {
   }
 
   if (!currentUser) {
-    // Se não houver usuário logado, você pode redirecionar para a página de login
-    // Ou exibir uma mensagem para o usuário logar
+    // Se não houver usuário logado, exibe mensagem para logar
     return (
       <div>
         <h2>Você não está logado.</h2>
@@ -22,8 +21,7 @@ function Dashboard() {
 
   const handleLogout = async () => {
     try {
-      await logout();
-      // Redirecionar para a página inicial ou de login após o logout
+      await logout(); // Redirecionar para a página inicial ou de login após o logout
       console.log('Logout efetuado com sucesso!');
     } catch (error) {
       console.error('Erro ao deslogar:', error.message);

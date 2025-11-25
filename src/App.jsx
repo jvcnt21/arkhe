@@ -1,36 +1,54 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Layout from "./components/Layout";
 import Login from "./components/Login";
-import Notifications from "./pages/Notifications/Notifications";
-import Tasks from "./pages/Tasks/Tasks";
-import Activity from "./pages/Activity/Activity";
-import Profile from "./pages/Profile/Profile";
+import Home from "./components/Home";
+import Notifications from "./components/Notifications";
+import Tasks from "./components/Tasks";
+import Activity from "./components/Activity";
+import Sidebar from "./components/Sidebar";
+import EquipeDetalhes from "./components/EquipeDetalhes";
+import EquipeProjetos from "./components/EquipeProjetos";
+import Perfil from "./components/Perfil"; // 🔥 IMPORTADO
 import { useAuth } from "./context/AuthContext";
 
-export default function App() {
+function App() {
   const { currentUser, loading } = useAuth();
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) {
+    return <div>Carregando aplicação...</div>;
+  }
 
   return (
-    <>
-      {!currentUser ? (
+    <div style={{ display: "flex" }}>
+      {currentUser && <Sidebar />}
+
+      <div style={{ marginLeft: currentUser ? "70px" : "0px", flex: 1, padding: "20px" }}>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Navigate to="/login" />} />
+
+          {currentUser ? (
+            <>
+              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Navigate to="/home" />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/tasks" element={<Tasks />} />
+              <Route path="/activity" element={<Activity />} />
+
+              <Route path="/equipe/:nome" element={<EquipeDetalhes />} />
+              <Route path="/equipe-projetos" element={<EquipeProjetos />} />
+
+              {/* 🔥 NOVA ROTA ADICIONADA */}
+              <Route path="/perfil" element={<Perfil />} />
+
+              <Route path="*" element={<Navigate to="/home" />} />
+            </>
+          ) : (
+            <Route path="*" element={<Navigate to="/login" />} />
+          )}
         </Routes>
-      ) : (
-        <Layout pageTitle="">
-          <Routes>
-            <Route path="/notifications" element={<Notifications />} />
-            <Route path="/tasks" element={<Tasks />} />
-            <Route path="/activity" element={<Activity />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="*" element={<Navigate to="/notifications" />} />
-          </Routes>
-        </Layout>
-      )}
-    </>
+      </div>
+    </div>
   );
 }
+
+export default App;

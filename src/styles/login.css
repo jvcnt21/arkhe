@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+/* ===== RESET E BASE ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body.login-page {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* ✅ impede scroll */
+  font-family: "Poppins", sans-serif;
+  background-color: #e7eaf0;
+}
+
+
+.login-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;   /* 🔥 Centraliza vertical e horizontal */
+  overflow: hidden;
+}
+
+/* ===== CARD ===== */
+.login-card {
+  width: 360px;
+  max-width: 92vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* LOGO */
+.logo {
+  width: 290px !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto 5px auto; /* ✅ diminui espaço entre logo e form */
+  filter: none !important;
+  transition: none !important;
+  pointer-events: none;
+  object-fit: contain;
+  max-width: none !important;
+}
+
+.login-box {
+  border-radius: 20px;
+  background-color: #e7eaf0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+}
+
+
+/* FORMULÁRIO */
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.login-form label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #002f7a;
+  margin-bottom: 6px;
+  margin-left: 2px;
+}
+
+.login-form input,
+.login-form button,
+.microsoft-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.login-form input {
+  border: 1.5px solid #002f7a;
+  background-color: transparent;
+  color: #002f7a;
+}
+
+.login-form input::placeholder {
+  color: #002f7a99;
+}
+
+/* BOTÃO ENTRAR */
+.login-form button[type="submit"] {
+  background-color: #002663;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.18s ease;
+}
+
+.login-form button[type="submit"]:hover {
+  background-color: #375585;
+}
+
+/* DIVISOR */
+.divider {
+  font-size: 14px;
+  color: #002f7a;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 420px) {
+  .login-card {
+    width: 92%;
+    gap: 12px;
+  }
+
+  .logo {
+    width: 180px;
+  }
+}

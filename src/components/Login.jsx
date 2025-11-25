@@ -1,81 +1,69 @@
-import React, { useState } from "react";
-import "../styles/login-screen.css";
+import React, { useState, useEffect } from "react";
+import "../styles/login.css";
 import { useAuth } from "../context/AuthContext";
-import Button from "./ui/Button";
-import Input from "./ui/Input";
+import logo from "../assets/logo-arkhe.png";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
-  const { login, loginWithMicrosoft } = useAuth();
+function Login() {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  // 👉 useEffect para aplicar a classe no body
+  useEffect(() => {
+    document.body.classList.add("login-page");
+
+    return () => {
+      document.body.classList.remove("login-page");
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
     try {
       await login(email, password);
-    } catch (err) {
-      console.error("Erro ao fazer login", err);
-    }
-    setLoading(false);
-  };
 
-  const handleMicrosoftLogin = async () => {
-    setLoading(true);
-    try {
-      await loginWithMicrosoft();
-    } catch (err) {
-      console.error("Erro ao entrar com Microsoft", err);
+      // 🔥 REDIRECIONA PARA HOME EM VEZ DE /notifications
+      navigate("/home", { replace: true });
+
+    } catch (error) {
+      alert("Erro ao fazer login. Verifique suas credenciais.");
+      console.error(error);
     }
-    setLoading(false);
   };
 
   return (
-    <div className="login-page">
+    <div className="login-container">
       <div className="login-card">
-        
-        <div className="login-logo-box">
-          <img src="/assets/logo-arkhe.png" alt="logo" className="login-logo" />
-          <h2 className="login-title">Arkhe</h2>
-        </div>
+        <img src={logo} alt="Logo" className="logo" />
 
-        <form onSubmit={handleSubmit} className="login-form">
-          <Input
-            label="E-mail"
+        <form className="login-form" onSubmit={handleSubmit}>
+          <label htmlFor="email">E-mail</label>
+          <input
             type="email"
+            id="email"
             placeholder="Digite seu e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            autoComplete="username"
           />
 
-          <Input
-            label="Senha"
+          <label htmlFor="password">Senha</label>
+          <input
             type="password"
+            id="password"
             placeholder="Digite sua senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+            autoComplete="current-password"
           />
 
-          <Button type="submit" variant="primary" disabled={loading}>
-            {loading ? "Entrando..." : "Entrar"}
-          </Button>
+          <button type="submit">Entrar</button>
         </form>
-
-        <div className="login-divider">
-          <span></span>
-          <p>Ou</p>
-          <span></span>
-        </div>
-
-        <Button variant="microsoft" onClick={handleMicrosoftLogin} disabled={loading}>
-          <img src="/assets/microsoft-icon.png" alt="ms" className="ms-icon" />
-          Entrar com Microsoft
-        </Button>
       </div>
     </div>
   );
 }
+
+export default Login;

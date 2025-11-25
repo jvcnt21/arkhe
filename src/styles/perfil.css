@@ -1,0 +1,133 @@
+/* ===== CONTAINER GERAL ===== */
+.perfil-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #f5f7fc;
+  min-height: 100vh;
+}
+
+.perfil-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1b1b1b;
+}
+
+/* ===== CARD ===== */
+.perfil-card {
+  width: 650px;                 /* 🔥 AUMENTEI DE 480px PARA 650px */
+  background: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+/* ===== TOPO DO CARD ===== */
+.perfil-top {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+/* Avatar */
+.perfil-avatar {
+  width: 90px;
+  height: 90px;
+  background-color: #0050ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+/* NOME CENTRALIZADO REAL OFICIAL */
+.perfil-nome-exibido {
+  flex: 1;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-left: 20px;
+}
+
+/* Logout alinhado ao canto direito */
+.logout-top-right {
+  background-color: #001a70;
+  color: white;
+  border: none;
+  padding: 9px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+  position: absolute;
+  right: 0;
+  top: 1;
+}
+
+.logout-top-right:hover {
+  background-color: #022a9d;
+}
+
+/* Email */
+.perfil-email {
+  text-align: center;
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* ===== FORMULÁRIO ===== */
+.perfil-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.perfil-form label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.perfil-form input,
+.perfil-form textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.perfil-form input:focus,
+.perfil-form textarea:focus {
+  border-color: #0050ff;
+}
+
+/* Botão salvar */
+.btn-salvar {
+  width: 100%;
+  background-color: #2ecc71;
+  color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  margin-top: 20px;
+  transition: 0.2s;
+}
+
+.btn-salvar:hover {
+  background-color: #27ae60;
+}
