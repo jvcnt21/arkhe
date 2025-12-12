@@ -1,102 +1,118 @@
-import React, { useState, useEffect } from "react";
-import "../styles/perfil.css";
-import { useAuth } from "../context/AuthContext";
 
-function Perfil() {
-  const { currentUser, logout } = useAuth();
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
+import '../styles/perfil.css';
 
-  const [nome, setNome] = useState(currentUser?.nome || "");
-  const [duvidas, setDuvidas] = useState("");
+export default function Perfil() {
+  const { userData, logout, setUserData } = useAuth(); 
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({ nome: '', email: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   useEffect(() => {
-    setNome(currentUser?.nome || "");
-  }, [currentUser]);
+    if (userData) {
+      setFormData({
+        nome: userData.nome || '',
+        email: userData.email || '',
+      });
+    }
+  }, [userData]);
 
-  const handleSubmit = (e) => {
+  const getAvatarLetter = () => {
+    return userData?.nome ? userData.nome.charAt(0).toUpperCase() : '?';
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+  
+  const handleSaveChanges = async (e) => {
     e.preventDefault();
-    alert("Nome atualizado localmente (persistência não implementada).");
+    setIsLoading(true);
+    setError('');
+    setSuccess('');
+
+    if (formData.nome === userData.nome) {
+      setIsLoading(false);
+      setError("Nenhuma alteração para salvar.");
+      return;
+    }
+
+    try {
+      const response = await api.patch('/users/profile', { nome: formData.nome });
+      
+      // Substitui o estado do usuário pelos dados atualizados da resposta
+      setUserData(response.data);
+
+      setSuccess("Nome atualizado com sucesso!");
+
+    } catch (err) {
+      console.error("Erro ao atualizar o perfil:", err);
+      setError("Falha ao atualizar o nome. Tente novamente.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleLogout = async () => {
     try {
       await logout();
-    } catch (err) {
-      console.error("Erro ao deslogar:", err);
+      navigate('/login', { replace: true });
+    } catch (error) {
+      console.error('Falha ao fazer logout:', error);
     }
   };
 
-  const getInitial = (n) => {
-    if (!n) return "?";
-    return n.charAt(0).toUpperCase();
-  };
-
   return (
-    <div className="perfil-container">
-      <h1 className="perfil-title">Meu Perfil</h1>
-
-      <div className="perfil-card">
-
-        {/* ====== TOPO (AVATAR + NOME + LOGOUT) ====== */}
-        <div className="perfil-top">
-          <div className="perfil-avatar">{getInitial(nome)}</div>
-
-          {/* Nome no lugar da faixa rosa */}
-          <div className="perfil-nome-exibido">{nome || "Seu nome"}</div>
-
-          {/* Logout no canto direito */}
-          <button className="logout-top-right" onClick={handleLogout}>
+    <div className="perfil-page-wrapper"> 
+      <div className="perfil-container">
+        <header className="perfil-header">
+          <div className="user-info">
+            <div className="user-avatar">{getAvatarLetter()}</div>
+            <span className="user-name">{userData?.nome}</span>
+          </div>
+          <button onClick={handleLogout} className="logout-button">
             Logout
           </button>
-        </div>
+        </header>
 
-        <p className="perfil-email">{currentUser?.email}</p>
-
-        {/* FORMULÁRIO */}
-        <form className="perfil-form" onSubmit={handleSubmit}>
-
-          <div className="form-group">
-            <label>Nome completo</label>
+        <form onSubmit={handleSaveChanges} className="perfil-form">
+          {error && <p className="error-message">{error}</p>}
+          {success && <p className="success-message">{success}</p>}
+          
+          <div className="input-group">
+            <label htmlFor="nome">Nome</label>
             <input
               type="text"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-              placeholder="Nome e sobrenome"
+              id="nome"
+              name="nome"
+              value={formData.nome}
+              onChange={handleInputChange}
+              disabled={isLoading}
             />
           </div>
-
-          <div className="form-group">
-            <label>E-mail</label>
-            <input type="email" value={currentUser?.email || ""} disabled />
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              disabled // O email não é editável
+            />
           </div>
-
-          <div className="form-group">
-            <label>RA</label>
-            <input type="text" value={currentUser?.ra || "000000"} disabled />
-          </div>
-
-          <div className="form-group">
-            <label>Orientador</label>
-            <input type="text" value={currentUser?.orientador || "Não definido"} disabled />
-          </div>
-
-          <div className="form-group">
-            <label>Dúvidas para o orientador</label>
-            <textarea
-              rows="5"
-              value={duvidas}
-              onChange={(e) => setDuvidas(e.target.value)}
-              placeholder="Escreva aqui suas dúvidas..."
-            ></textarea>
-          </div>
-
-          <button type="submit" className="btn-salvar">
-            Salvar Alterações
+          <button type="submit" className="save-button" disabled={isLoading}>
+            {isLoading ? 'Salvando...' : 'Salvar Alterações'}
           </button>
         </form>
-
       </div>
     </div>
   );
 }
-
-export default Perfil;

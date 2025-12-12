@@ -1,0 +1,313 @@
+/* Container principal da página do grupo */
+.group-page-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Cabeçalho da página */
+  .group-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .group-page-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  .back-link {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+  }
+  
+  .back-link:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Conteúdo principal */
+  .group-page-main {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+  }
+  
+  .project-info-box h2 {
+    font-size: 1.8rem;
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+  }
+  
+  .group-theme {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    color: #555;
+  }
+
+  .description-section {
+    margin-bottom: 30px;
+  }
+
+  .description-section h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .description-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .save-description-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .save-description-button:hover {
+    background-color: #218838;
+  }
+  
+  .professor-actions {
+    margin-bottom: 30px;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .open-modal-button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .open-modal-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .members-section h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .members-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .member-item {
+    display: flex;
+    justify-content: space-between; /* Alinha o conteúdo principal e as ações */
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s;
+  }
+
+  .member-item:hover {
+    background-color: #f9f9f9;
+  }
+
+  .member-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .member-initial-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-right: 20px;
+  }
+  
+  .member-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .member-name {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #444;
+  }
+  
+  .member-email {
+    color: #777;
+    font-size: 0.9rem;
+  }
+
+  /* Estilos para o menu de ações do membro */
+  .member-actions {
+    position: relative; /* Necessário para o posicionamento do menu */
+  }
+
+  .member-menu-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #888;
+  }
+
+  .member-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+    width: 160px;
+  }
+
+  .member-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .member-menu button:hover {
+    background-color: #f5f5f5;
+  }
+
+  .remove-member-button {
+    color: red;
+  }
+  
+  .loading-message, .error-message {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.1rem;
+  }
+  
+  .error-message {
+    color: #d9534f;
+  }
+
+/* Container para as seções de features (Notificações, Progresso) */
+.features-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Espaço entre as caixas */
+  margin-top: 30px;
+}
+
+/* Estilo base para as caixas de feature */
+.feature-box {
+  flex: 1; /* Faz com que ambas as caixas ocupem o mesmo espaço */
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.feature-box h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.feature-box p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Botões em formato de ícone */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: #003366; /* Azul escuro */
+  padding: 6px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.icon-button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Lixeira */
+.icon-button.delete {
+  color: #003366; /* Azul escuro também */
+}
+
+/* Container dos botões */
+.professor-actions {
+  margin-bottom: 30px;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.group-actions {
+  display: flex;
+  flex-direction: row; /* deixa lado a lado */
+  align-items: center;
+  gap: 15px; /* espaço entre os botões */
+}
+
+.delete-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: #003366; /* azul escuro */
+  padding: 6px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.delete-icon-button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}

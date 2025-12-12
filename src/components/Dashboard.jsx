@@ -30,7 +30,7 @@ function Dashboard() {
 
   return (
     <div>
-      <h2>Bem-vindo, {currentUser.email}!</h2>
+  
       <p>Este é o seu painel de controle.</p>
       <button onClick={handleLogout}>Sair</button>
     </div>

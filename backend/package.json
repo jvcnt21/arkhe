@@ -1,17 +1,20 @@
 {
-  "name": "arkhe-backend",
+  "name": "arkhe-backend-firestore",
   "version": "1.0.0",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-  "start": "node src/server.js",
-  "dev": "node --watch src/server.js"
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node tools/seedFirestore.js"
   },
   "dependencies": {
-  "cors": "^2.8.5",
-  "dotenv": "^16.0.0",
-  "express": "^4.18.2",
-  "firebase-admin": "^11.10.0",
-  "mysql2": "^3.2.0"
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.10.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0"
   }
-  }
+}

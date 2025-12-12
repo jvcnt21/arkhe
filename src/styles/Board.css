@@ -1,0 +1,103 @@
+/* Container principal do quadro Kanban */
+.board-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.board-header {
+  margin-bottom: 20px;
+}
+
+.board-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #333;
+}
+
+/* Conteúdo do quadro que contém as listas */
+.board-content {
+  display: flex;
+  gap: 20px; /* Espaçamento entre as listas */
+  flex-grow: 1;
+}
+
+/* Estilo de cada lista (coluna) */
+.board-list {
+  background-color: #f4f5f7;
+  border-radius: 8px;
+  width: 280px;
+  flex-shrink: 0; /* Impede que as colunas encolham */
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+/* Cabeçalho da lista */
+.list-header {
+  padding: 15px;
+  border-top: 5px solid transparent; /* A cor virá do style inline */
+  border-radius: 8px 8px 0 0;
+  background-color: #f4f5f7;
+}
+
+.list-header h3 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #172b4d;
+}
+
+/* Container dos cartões */
+.list-cards {
+  padding: 8px;
+  overflow-y: auto; /* Permite rolagem se houver muitos cartões */
+  flex-grow: 1;
+  min-height: 100px; /* Altura mínima para a área de drop */
+}
+
+/* Estilo de cada cartão de tarefa */
+.card {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  cursor: grab; /* Indica que pode ser arrastado */
+  transition: background-color 0.2s ease;
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.95em;
+}
+
+/* Estilo do cartão quando está sendo arrastado */
+.card.dragging {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2), 0 6px 20px rgba(0,0,0,0.19);
+  background-color: #e6f7ff;
+}
+
+/* Estilo da coluna quando um cartão está sendo arrastado sobre ela */
+.board-list.dragging-over {
+  background-color: #e9f2ff;
+}
+
+
+/* Mensagens de estado */
+.board-loading, .board-error, .board-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2em;
+  color: #666;
+}
+
+.no-cards-message {
+  text-align: center;
+  color: #888;
+  padding: 20px;
+  font-style: italic;
+}

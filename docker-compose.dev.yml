@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "9000:5173"  # Porta 9000 externa → 5173 interna do Vite
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+      - backend_node_modules:/app/backend/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  node_modules:
+  backend_node_modules:

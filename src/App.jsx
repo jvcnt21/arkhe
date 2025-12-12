@@ -1,53 +1,73 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/Login";
-import Home from "./components/Home";
-import Notifications from "./components/Notifications";
-import Tasks from "./components/Tasks";
-import Activity from "./components/Activity";
-import Sidebar from "./components/Sidebar";
-import EquipeDetalhes from "./components/EquipeDetalhes";
-import EquipeProjetos from "./components/EquipeProjetos";
-import Perfil from "./components/Perfil"; // 🔥 IMPORTADO
-import { useAuth } from "./context/AuthContext";
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
+
+// Layouts
+import AuthLayout from './layouts/AuthLayout';
+import MainLayout from './layouts/MainLayout';
+
+// Componentes de Rota
+import ProtectedRoute from './components/ProtectedRoute';
+import PublicRoute from './components/PublicRoute';
+
+// Páginas
+import Home from './components/Home';
+import Login from './components/Login';
+import Register from './components/Register';
+import Groups from './components/Groups';
+import Tasks from './components/Tasks';
+import Notifications from './components/Notifications';
+import Perfil from './components/Perfil';
+import GroupPage from './components/GroupPage';
+import EquipeDetalhes from './components/EquipeDetalhes';
+import QuadroDeTarefas from './components/quadrodetarefads'; // Importação adicionada
 
 function App() {
-  const { currentUser, loading } = useAuth();
+  const { loading } = useAuth();
 
   if (loading) {
-    return <div>Carregando aplicação...</div>;
+    return <div className="app-loading">A carregar aplicação...</div>;
   }
 
   return (
-    <div style={{ display: "flex" }}>
-      {currentUser && <Sidebar />}
-
-      <div style={{ marginLeft: currentUser ? "70px" : "0px", flex: 1, padding: "20px" }}>
-        <Routes>
+    <Routes>
+      {/* Rotas Públicas */}
+      <Route element={<PublicRoute />}>
+        <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+      </Route>
 
-          {currentUser ? (
-            <>
-              <Route path="/home" element={<Home />} />
-              <Route path="/" element={<Navigate to="/home" />} />
-              <Route path="/notifications" element={<Notifications />} />
-              <Route path="/tasks" element={<Tasks />} />
-              <Route path="/activity" element={<Activity />} />
+      {/* Rotas Protegidas */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<MainLayout />}>
+          {/* Rotas de navegação principais */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/groups" element={<Groups />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/perfil" element={<Perfil />} />
 
-              <Route path="/equipe/:nome" element={<EquipeDetalhes />} />
-              <Route path="/equipe-projetos" element={<EquipeProjetos />} />
+          {/* Rota para um Grupo Específico */}
+          <Route path="/group/:id" element={<GroupPage />}>
+            <Route index element={<EquipeDetalhes />} />
+          </Route>
+          
+           {/* Rota de notificações isolada */}
+          <Route path="/group/:id/notifications" element={<Notifications />} />
 
-              {/* 🔥 NOVA ROTA ADICIONADA */}
-              <Route path="/perfil" element={<Perfil />} />
+          {/* Rota para o Quadro de Tarefas de um grupo */}
+          <Route path="/group/:id/board" element={<QuadroDeTarefas />} />
 
-              <Route path="*" element={<Navigate to="/home" />} />
-            </>
-          ) : (
-            <Route path="*" element={<Navigate to="/login" />} />
-          )}
-        </Routes>
-      </div>
-    </div>
+        </Route>
+      </Route>
+      
+      {/* Redirecionamento geral para a página de login se nenhuma rota corresponder */}
+      <Route 
+        path="*"
+        element={<Navigate to="/login" replace />}
+      />
+    </Routes>
   );
 }
 

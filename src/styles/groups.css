@@ -1,0 +1,170 @@
+.groups-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.groups-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.groups-header .logo {
+    max-width: 150px;
+    margin-bottom: 1rem;
+}
+
+.groups-header h1 {
+    color: #333;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.groups-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.groups-list {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.groups-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.groups-list p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.group-item {
+    display: flex; /* Transforma o item em um container flex */
+    justify-content: space-between; /* Alinha o link e as opções */
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease-in-out;
+    padding: 0 1rem; /* Adiciona padding horizontal para espaçamento */
+}
+
+.group-item:last-child {
+    border-bottom: none;
+}
+
+.group-item:hover {
+    background-color: #f9f9f9;
+}
+
+.group-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1; /* Faz o link ocupar o espaço disponível */
+}
+
+.group-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.group-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.group-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.group-creator {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Estilos para o menu de opções */
+.group-options {
+    position: relative; /* Necessário para o posicionamento do menu */
+    z-index: 10;
+}
+
+.options-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #888;
+    padding: 5px;
+}
+
+.options-button:hover {
+    color: #333;
+}
+
+.options-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    z-index: 100; /* Garante que fique sobre outros elementos */
+    width: 120px; /* Largura do menu */
+}
+
+.options-menu button {
+    background: none;
+    border: none;
+    padding: 12px 16px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.options-menu button:hover {
+    background-color: #f5f5f5;
+}
+
+/* ... (outros estilos) ... */
+.create-group-container, .groups-footer {
+    /* (Mantém os estilos existentes aqui) */
+}

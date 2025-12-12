@@ -1,287 +1,135 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 80px;
-  background-color: #ffffff;
-  color: #fff;
-  font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  transition: width 0.3s ease;
-  overflow: hidden;
-  z-index: 100;
+/* Define a variável para a cor azul escuro para facilitar a manutenção */
+:root {
+  --dark-blue: #001f3f;
 }
 
+.sidebar {
+    width: 80px; /* Largura da barra lateral recolhida */
+    background-color: #ffffff; /* Fundo branco */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: fixed;
+    transition: width 0.3s ease; /* Transição suave para a largura */
+    overflow-x: hidden; /* Esconde o texto que transborda antes da expansão */
+    z-index: 1000; /* Garante que a sidebar fique no topo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+}
+
+/* Estado expandido ao passar o mouse */
 .sidebar:hover {
-  width: 240px;
-  align-items: flex-start;
-  padding-left: 10px;
+    width: 250px;
 }
 
 .sidebar-logo {
-  width: 100%;
+  padding: 30px 15px 15px; /* Ajustado */
   text-align: center;
-  padding: 20px 0;
-  transition: opacity 0.3s ease;
-}
-
-.sidebar-logo img {
-  width: 40px;
-  height: auto;
-  transition: width 0.3s ease;
-}
-
-.sidebar:hover .sidebar-logo img {
-  width: 120px;
-}
-
-/* MENU */
-.sidebar-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-}
-
-.menu-item {
+  height: 80px; /* Reduzido */
   display: flex;
   align-items: center;
-  gap: 14px;
-  color: #132469;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 15px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.menu-item i {
-  font-size: 20px;
-  min-width: 30px;
-  text-align: center;
-}
-
-.menu-item span {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.sidebar:hover .menu-item span {
-  opacity: 1;
-}
-
-.menu-item:hover,
-.menu-item.active {
-  background:#1324690e;
-  transform: translateX(4px);
-}
-
-/* RODAPÉ */
-.sidebar-footer {
-  width: 100%;
-  padding: 20px;
-  position: relative;
-  display: flex;
   justify-content: center;
+  position: relative;
+  margin-bottom: 20px; /* Espaço reduzido */
 }
 
-.user-icon {
-  background:#132469;
-  border-radius: 50%;
-  padding: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* Mostra apenas o ícone (coruja) quando recolhido */
+.sidebar .logo-icon {
+  display: block;
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  transition: all 0.5s ease; /* Transição mais suave */
 }
 
-.user-icon:hover {
-  background: #132469ba;
+.sidebar .logo-full {
+  display: none;
 }
 
-.user-icon i {
-  font-size: 20px;
-  color: #fff;
+/* Mostra o logo completo quando expandido */
+.sidebar:hover .logo-icon {
+  display: none;
 }
 
-/* POPUP LOGOUT */
-.logout-popup {
-  position: absolute;
-  bottom: 70px;
-  background: #fff;
-  color: #132469;
-  border-radius: 10px;
-  padding: 8px 14px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.2s ease;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
+.sidebar:hover .logo-full {
+  display: block;
+  max-width: 160px; /* Reduzido de 200px */
+  width: 75%; /* Reduzido de 90% */
+  height: auto;
+  animation: slideInFromLeft 0.5s ease forwards; /* Animação suave */
 }
 
-.logout-popup button {
-  background: none;
-  border: none;
-  color: #132469;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
+/* Animação de deslizar da esquerda */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.logout-popup button:hover {
-  color: #e11d48;
-}
-
-/* === POSICIONAR O POPUP EXATAMENTE EM CIMA DO ÍCONE DE USUÁRIO === */
-
-.sidebar-footer {
-  position: relative; /* deixa o popup ancorado dentro da sidebar */
-}
-
-.logout-popup.popup--above {
-  position: absolute;
-  bottom: 60px;      /* distância do popup até o ícone */
-  left: 50%;         /* centraliza horizontalmente */
-  transform: translateX(-50%);
-  z-index: 999;
-}
-/* --- MOVENDO O MENU PARA LOGO ABAIXO DA LOGO --- */
-
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 80px;
-  background-color: #ffffff;
-  font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: width 0.3s ease;
-  overflow: hidden;
-  z-index: 100;
-}
-
-/* Sidebar expandida */
-.sidebar:hover {
-  width: 240px;
-  align-items: flex-start;
-  padding-left: 10px;
-}
-
-/* LOGO */
-.sidebar-logo {
-  width: 100%;
-  text-align: center;
-  padding: 20px 0 10px 0; /* DIMINUI PRA FICAR MAIS COLADO NA LOGO */
-}
-
-.sidebar-logo img {
-  width: 40px;
-  transition: width 0.3s ease;
-}
-
-.sidebar:hover .sidebar-logo img {
-  width: 120px;
-}
-
-/* === MENU LOGO ABAIXO DA LOGO === */
 .sidebar-menu {
-  margin-top: 5px;       /* ENCOSTA NO TOPO */
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 6px;              /* DIMINUI ESPAÇAMENTO */
+  flex-grow: 1;
 }
 
-/* ITENS DO MENU */
 .menu-item {
+  padding: 15px 25px; /* Ajusta o padding para centralizar o ícone */
   display: flex;
   align-items: center;
-  gap: 14px;
-  color: #132469;
-  font-weight: 500;
-  font-size: 15px;
-  padding: 10px 16px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.menu-item i {
-  font-size: 20px;
-  min-width: 30px;
-  text-align: center;
-}
-
-.menu-item span {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.sidebar:hover .menu-item span {
-  opacity: 1;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: var(--dark-blue); /* Garante que a cor do ícone seja azul escuro */
 }
 
 .menu-item:hover {
-  background: #1324690e;
-  transform: translateX(4px);
+  background-color: #f0f2f5; /* Um cinza claro para o hover */
 }
 
-/* === PERFIL CONTINUA FIXO NO FUNDO === */
+.menu-item i {
+  margin-right: 15px;
+  font-size: 1.2em;
+  min-width: 30px; /* Largura mínima para manter o alinhamento */
+  text-align: center;
+}
+
+/* Oculta o texto por padrão */
+.menu-item span {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    white-space: nowrap; /* Impede que o texto quebre a linha */
+}
+
+/* Exibe o texto quando a barra lateral está expandida */
+.sidebar:hover .menu-item span {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.1s; /* Pequeno atraso para o texto aparecer */
+}
+
 .sidebar-footer {
-  margin-top: auto; /* Mantém o usuário SEMPRE NA PARTE DE BAIXO */
-  padding: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  padding: 20px 25px; /* Ajusta o padding */
+  text-align: center;
 }
 
 .user-icon {
-  background: #132469;
-  padding: 10px;
-  border-radius: 50%;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.user-icon:hover {
-  background: #102058;
+.user-icon i {
+  font-size: 1.5em;
+  color: var(--dark-blue); /* Cor do ícone do usuário */
 }
 
-/* POPUP */
-.logout-popup {
-  background: #fff;
-  padding: 8px 14px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  animation: fadeIn 0.2s ease;
-  white-space: nowrap;
+/* Estilo para o item de menu desabilitado */
+.menu-item.disabled {
+    color: #aaa; /* Cinza mais claro para desabilitado */
+    cursor: not-allowed;
 }
 
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* RESPONSIVO */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 70px;
-  }
-
-  .sidebar:hover {
-    width: 180px;
-  }
+.menu-item.disabled:hover {
+    background-color: transparent; /* Remove o efeito de hover */
+    color: #aaa; /* Mantém a cor desabilitada */
 }

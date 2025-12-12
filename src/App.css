@@ -1,21 +1,32 @@
-#root {
-  width: 100%;
-  height: 100%;
-  margin: 0 !important;
-  padding: 0 !important;
-  text-align: left;
+/* Estilo base para o container da aplicação */
+.app-container {
+  display: flex;
+  background-color: #f0f2f5;
 }
 
-/* REMOVER estilos do Vite — eles atrapalham seu layout */
-.logo,
-.card,
-.read-the-docs {
-  padding: 0 !important;
-  margin: 0 !important;
+/* 
+  O conteúdo principal agora tem uma margem inicial menor (para a barra recolhida) 
+  e uma transição suave para acompanhar a barra lateral.
+*/
+.content {
+  flex-grow: 1;
+  padding: 2rem;
+  min-height: 100vh;
+  margin-left: 80px; /* Corresponde à largura da barra lateral recolhida */
+  transition: margin-left 0.3s ease; /* Anima a mudança de margem */
 }
 
-.logo {
-  height: auto !important;
+/* 
+  Quando o mouse passa sobre a barra lateral (que está dentro de .app-container),
+  a margem do conteúdo principal se expande.
+*/
+.app-container:has(.sidebar:hover) .content {
+  margin-left: 250px; /* Corresponde à largura da barra lateral expandida */
 }
 
-@keyframes logo-spin {}
+/* 
+  Quando a barra lateral está oculta, o conteúdo principal ocupa toda a largura.
+*/
+.app-container.no-sidebar .content {
+  margin-left: 0;
+}

@@ -1,223 +1,129 @@
-import React, { useState } from "react";
-import "../styles/notifications.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import api from '../services/api'; // Importa a instância api
+import CreateNoticeModal from './CreateNoticeModal';
+import '../styles/Notifications.css';
 
-function Notifications() {
-  const navigate = useNavigate();
+// Componente para renderizar cada notificação
+const NotificationItem = ({ notificacao, onDelete }) => {
+  const { userData } = useAuth();
+  const { id, tipo, titulo, descricao, dataPublicacao, professorId, professorNome } = notificacao;
 
-  const [prazoModal, setPrazoModal] = useState({ open: false, data: null });
+  const dataFormatada = dataPublicacao?.seconds 
+    ? new Date(dataPublicacao.seconds * 1000).toLocaleString('pt-BR') 
+    : "Agora mesmo";
 
-  function irParaTasks() {
-    navigate("/tasks");
-  }
-
-  const notificacoes = [
-    {
-      tipo: "Nova tarefa atribuída",
-      descricao: "Diagrama de caso de uso",
-      tempo: "Há 5 minutos",
-      cor: "blue",
-      icon: "fa-solid fa-bell",
-      taskId: 101
-    },
-    {
-      tipo: "Tarefa concluída",
-      descricao: "Estudo de cenário",
-      tempo: "Há 1 hora",
-      cor: "green",
-      icon: "fa-solid fa-check",
-      taskId: 102
-    },
-    {
-      tipo: "Prazo próximo",
-      descricao: "Wireframe em 2 dias",
-      tempo: "Há 3 horas",
-      cor: "yellow",
-      icon: "fa-solid fa-clock",
-      taskId: 103,
-      tarefa: "Wireframe - Página Inicial",
-      remaining: "2 dias e 4 horas"
-    },
-  ];
-
-  const equipe = [
-    {
-      nome: "Lucas Pereira",
-      cargo: "Líder do Projeto",
-      acesso: "Há 3 dias",
-      atividades: ["Documento de requisitos", "Revisão geral"],
-    },
-    {
-      nome: "Mariana Silva",
-      cargo: "UX Designer",
-      acesso: "Há 5 horas",
-      atividades: ["Protótipo inicial"],
-    },
-    {
-      nome: "João Carvalho",
-      cargo: "Desenvolvedor Front-end",
-      acesso: "Há 1 hora",
-      atividades: ["Correção de bugs", "Refatoração"],
-    },
-    {
-      nome: "Ana Souza",
-      cargo: "Desenvolvedora Back-end",
-      acesso: "Há 10 horas",
-      atividades: ["Atualização de API"],
-    },
-  ];
-
-  function abrirPerfil(membro) {
-    navigate("/equipe/" + encodeURIComponent(membro.nome), { state: membro });
-  }
-
-  function abrirEquipeProjetos() {
-    navigate("/equipe-projetos");
-  }
-
-  function handleNotifClick(n) {
-    if (n.tipo === "Nova tarefa atribuída") {
-      navigate("/activity", { state: { fromNotification: true, taskId: n.taskId } });
-      return;
-    }
-
-    if (n.tipo === "Tarefa concluída") {
-      navigate("/activity?tab=entregue");
-      return;
-    }
-    
-
-    if (n.tipo === "Prazo próximo") {
-      setPrazoModal({ open: true, data: n });
-      return;
-    }
-  }
-
-  function fazerAgora(task) {
-    setPrazoModal({ open: false, data: null });
-    navigate("/activity", { state: { openTaskId: task.taskId } });
-  }
-
-  function fecharModal() {
-    setPrazoModal({ open: false, data: null });
-  }
+  const canDelete = userData?.tipoConta === 'professor' && userData?.uid === professorId;
 
   return (
-    <div className="dashboard-container">
-      <div className="top-header">
-        <h2>Notificações</h2>
+    <div className={`notification-item ${tipo?.toLowerCase()}`}>
+      <div className="notification-item-header">
+        <span className="notification-type">{tipo || 'Notificação'}</span>
+        {tipo === 'Aviso' && professorNome && 
+          <span className="notification-professor">por {professorNome}</span>
+        }
+        <span className="notification-date">{dataFormatada}</span>
       </div>
-
-      <div className="dashboard-stats">
-        <div className="stat-card" onClick={irParaTasks} style={{ cursor: "pointer" }}>
-          <i className="icon fa-solid fa-list-check azul"></i>
-          <p>Tarefas a fazer</p>
-          <h3>3</h3>
-        </div>
-
-        <div className="stat-card" onClick={abrirEquipeProjetos} style={{ cursor: "pointer" }}>
-          <i className="icon fa-solid fa-users roxo"></i>
-          <p>Membros na equipe</p>
-          <h3>{equipe.length}</h3>
-        </div>
+      <div className="notification-item-body">
+        <h4>{titulo}</h4>
+        <p>{descricao}</p>
       </div>
-
-      <div className="main-content">
-        {/* NOTIFICAÇÕES */}
-        <div className="notificacoes">
-          <h3 className="section-title azul">
-            <i className="fa-solid fa-bell"></i> Notificações Recentes
-          </h3>
-
-          <div className="notif-scroll">
-            {notificacoes.map((n, i) => {
-              const clickable =
-                n.tipo === "Nova tarefa atribuída" ||
-                n.tipo === "Tarefa concluída" ||
-                n.tipo === "Prazo próximo";
-
-              return (
-                <div
-                  key={i}
-                  className={`notif-card ${n.cor}`}
-                  onClick={() => clickable && handleNotifClick(n)}
-                  style={{ cursor: clickable ? "pointer" : "default" }}
-                >
-                  <i className={n.icon} style={{ marginTop: 4 }}></i>
-                  <div>
-                    <strong>{n.tipo}</strong>
-                    <p>{n.descricao}</p>
-                    <span>{n.tempo}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+      {canDelete && (
+        <div className="notification-item-footer">
+          <button onClick={() => onDelete(id)} className="delete-button">
+            Excluir
+          </button>
         </div>
+      )}
+    </div>
+  );
+};
 
-        {/* EQUIPE */}
-        <div className="equipe">
-          <h3 className="section-title roxo">
-            <i className="fa-solid fa-user-group"></i> Equipe
-          </h3>
+function Notifications() {
+  const { id: idGrupo } = useParams();
+  const { userData } = useAuth(); // Token não é mais necessário aqui
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [notificacoes, setNotificacoes] = useState([]);
+  const [error, setError] = useState(null);
 
-          {equipe.map((m, i) => (
-            <div
-              key={i}
-              className="membro"
-              onClick={() => abrirPerfil(m)}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="membro-foto-inicial">{m.nome.charAt(0)}</div>
+  const fetchNotificacoes = async () => {
+    try {
+      // Usa a instância do api para fazer a requisição
+      const response = await api.get(`/notificacoes/${idGrupo}`);
+      setNotificacoes(response.data);
+    } catch (err) {
+      setError(err.response?.data?.error || 'Falha ao carregar notificações');
+    }
+  };
 
-              <div>
-                <p><strong>{m.nome}</strong></p>
-                <span>{m.cargo}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+  useEffect(() => {
+    if (idGrupo) {
+      fetchNotificacoes();
+    }
+  }, [idGrupo]); // A dependência do token foi removida
 
-      <div className="atividade" style={{ cursor: "default" }}>
-        <h3 className="section-title amarelo">
-          <i className="fa-solid fa-clock"></i> Atividade Recente
-        </h3>
-        <p>Usuário 2 adicionou um arquivo ao quadro</p>
-        <span>Há 10 minutos</span>
-      </div>
+  const handleCreateNotice = async (noticeData) => {
+    try {
+      // Usa a instância do api para criar o aviso
+      const response = await api.post(`/notificacoes/${idGrupo}/avisos`, noticeData);
+      const { aviso } = response.data;
+      setNotificacoes([aviso, ...notificacoes]);
+      setIsModalOpen(false);
+    } catch (err) {
+      const errorMessage = err.response?.data?.error || 'Falha ao criar aviso';
+      setError(errorMessage);
+      alert(`Erro: ${errorMessage}`);
+    }
+  };
 
-      {/* MODAL PRAZO PRÓXIMO */}
-      {prazoModal.open && prazoModal.data && (
-      <div className="modal-fundo" onClick={fecharModal}>
-        <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-          
-          <h3>Atenção — prazo próximo</h3>
+  const handleDeleteNotice = async (idNotificacao) => {
+    if (!window.confirm("Tem certeza de que deseja excluir este aviso?")) {
+      return;
+    }
+    try {
+      // Usa a instância do api para deletar o aviso
+      await api.delete(`/notificacoes/${idGrupo}/${idNotificacao}`);
+      setNotificacoes(notificacoes.filter(n => n.id !== idNotificacao));
+    } catch (err) {
+      const errorMessage = err.response?.data?.error || 'Falha ao excluir aviso';
+      setError(errorMessage);
+      alert(`Erro: ${errorMessage}`);
+    }
+  };
 
-          <p><strong>Atividade:</strong> {prazoModal.data.tarefa}</p>
-          <p><strong>Falta:</strong> {prazoModal.data.remaining}</p>
+  return (
+    <div className="notifications-container">
+      <header className="notifications-header">
+        <h1>Notificações do Grupo</h1>
+        {userData && userData.tipoConta === 'professor' && (
+          <button onClick={() => setIsModalOpen(true)} className="create-notice-button">
+            Criar Aviso
+          </button>
+        )}
+      </header>
 
-          <div className="modal-btns">
-            <button
-              className="modal-btn fazer"
-              onClick={() => fazerAgora(prazoModal.data)}
-            >
-              Fazer tarefa
-            </button>
+      {error && <p className="error-message">{error}</p>}
 
-            <button
-              className="modal-btn tarde"
-              onClick={fecharModal}
-            >
-              Fazer mais tarde
-            </button>
-          </div>
+      <main className="notifications-main">
+        {notificacoes.length === 0 && !error ? (
+          <p>Nenhuma notificação por aqui ainda.</p>
+        ) : (
+          notificacoes.map(notificacao => (
+            <NotificationItem 
+              key={notificacao.id} 
+              notificacao={notificacao} 
+              onDelete={handleDeleteNotice}
+            />
+          ))
+        )}
+      </main>
 
-        </div>
-      </div>
-    )}
-
+      <CreateNoticeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onCreateNotice={handleCreateNotice}
+      />
     </div>
   );
 }

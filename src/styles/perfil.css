@@ -1,133 +1,128 @@
-/* ===== CONTAINER GERAL ===== */
-.perfil-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px;
-  background-color: #f5f7fc;
-  min-height: 100vh;
-}
-
-.perfil-title {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #1b1b1b;
-}
-
-/* ===== CARD ===== */
-.perfil-card {
-  width: 650px;                 /* 🔥 AUMENTEI DE 480px PARA 650px */
-  background: #fff;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  position: relative;
-}
-
-/* ===== TOPO DO CARD ===== */
-.perfil-top {
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-bottom: 25px;
+/* Novo wrapper para centralizar a página de perfil */
+.perfil-page-wrapper {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinha ao topo */
 }
 
-/* Avatar */
-.perfil-avatar {
-  width: 90px;
-  height: 90px;
-  background-color: #0050ff;
+/* Container principal da página de perfil */
+.perfil-container {
+  max-width: 700px;
+  width: 100%; /* Garante que o container ocupe a largura máxima definida */
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Cabeçalho */
+.perfil-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Espaço entre o avatar e o nome */
+}
+
+/* Ícone com a letra */
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #132469; /* Cor de fundo do ícone */
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 36px;
+  font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 50%;
 }
 
-/* NOME CENTRALIZADO REAL OFICIAL */
-.perfil-nome-exibido {
-  flex: 1;
-  font-size: 22px;
+.user-name {
+  font-size: 1.4rem;
   font-weight: 600;
   color: #333;
-  margin-left: 20px;
 }
 
-/* Logout alinhado ao canto direito */
-.logout-top-right {
-  background-color: #001a70;
+.logout-button {
+  background-color: #f44336; /* Vermelho para logout */
   color: white;
   border: none;
-  padding: 9px 8px;
-  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
-  transition: 0.2s;
-  position: absolute;
-  right: 0;
-  top: 1;
+  transition: background-color 0.2s;
 }
 
-.logout-top-right:hover {
-  background-color: #022a9d;
+.logout-button:hover {
+  background-color: #d32f2f;
 }
 
-/* Email */
-.perfil-email {
-  text-align: center;
-  font-size: 15px;
-  color: #666;
-  margin-bottom: 25px;
-}
-
-/* ===== FORMULÁRIO ===== */
-.perfil-form .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+/* Formulário de edição */
+.perfil-form .input-group {
+  margin-bottom: 1.5rem;
 }
 
 .perfil-form label {
-  font-size: 15px;
+  display: block;
+  margin-bottom: 0.5rem;
   font-weight: 500;
-  color: #222;
-  margin-bottom: 6px;
+  color: #555;
 }
 
-.perfil-form input,
-.perfil-form textarea {
+.perfil-form input {
   width: 100%;
-  padding: 14px;
-  border-radius: 10px;
+  padding: 0.8rem;
   border: 1px solid #ccc;
-  font-size: 15px;
-  outline: none;
-  transition: border 0.2s;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
-.perfil-form input:focus,
-.perfil-form textarea:focus {
-  border-color: #0050ff;
+.perfil-form input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
 }
 
-/* Botão salvar */
-.btn-salvar {
+.save-button {
   width: 100%;
-  background-color: #2ecc71;
-  color: #fff;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 0.9rem;
+  background-color: #132469;
+  color: white;
   border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 17px;
-  margin-top: 20px;
-  transition: 0.2s;
+  transition: background-color 0.2s;
 }
 
-.btn-salvar:hover {
-  background-color: #27ae60;
+.save-button:hover {
+  background-color: #0a1d4a;
+}
+
+/* Mensagens de erro e sucesso */
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.success-message {
+  color: #388e3c;
+  background-color: #e8f5e9;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
 }

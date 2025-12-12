@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Função auxiliar para verificar se o usuário é membro ou professor.
+    function isGroupMember(groupId) {
+      let groupData = get(/databases/$(database)/documents/grupos/$(groupId)).data;
+      let isProfessor = ('professorId' in groupData) && (request.auth.uid == groupData.professorId);
+      let isMember = ('membros' in groupData) && (request.auth.uid in groupData.membros);
+      return isProfessor || isMember;
+    }
+
+    // Função auxiliar para verificar se o usuário é o professor do grupo (para documentos existentes).
+    function isGroupProfessor(groupId) {
+      let groupData = get(/databases/$(database)/documents/grupos/$(groupId)).data;
+      return ('professorId' in groupData) && (request.auth.uid == groupData.professorId);
+    }
+
+    // Regras para a coleção de usuários
+    match /usuarios/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == userId;
+    }
+
+    // Regras para a coleção de grupos
+    match /grupos/{groupId} {
+      // PERMISSÃO DE CRIAÇÃO (O ERRO ESTAVA AQUI)
+      // Permite criar se o usuário estiver logado e se declarar como professor do novo grupo.
+      allow create: if request.auth.uid != null && request.resource.data.professorId == request.auth.uid;
+      
+      // PERMISSÕES DE LEITURA, ATUALIZAÇÃO E EXCLUSÃO
+      // Requer que o documento já exista, por isso usamos as funções auxiliares.
+      allow read: if isGroupMember(groupId);
+      allow update, delete: if isGroupProfessor(groupId);
+
+      // Regras para a subcoleção de tarefas
+      match /tarefas/{tarefaId} {
+        allow list: if isGroupMember(groupId);
+        allow get, update: if isGroupMember(groupId);
+        allow create, delete: if isGroupProfessor(groupId);
+      }
+
+      // Regras para a subcoleção de notificações
+      match /notificacoes/{notificationId} {
+        allow read, update: if isGroupMember(groupId);
+        allow create, delete: if isGroupProfessor(groupId);
+      }
+    }
+  }
+}

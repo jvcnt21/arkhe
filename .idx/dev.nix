@@ -7,6 +7,7 @@
   packages = [
     pkgs.nodejs_20
     pkgs.docker
+    pkgs.docker-compose 
   ];
   # Sets environment variables in the workspace
   env = {};
@@ -36,5 +37,6 @@
     };
   };
   # Enable the Docker daemon
+
   services.docker.enable = true;
 }
